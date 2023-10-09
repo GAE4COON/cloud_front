@@ -9,3 +9,4 @@ npm install @react-oauth/google@latest
 npm install axios
 npm install jwt-decode
 npm install react-responsive
+npm install react-cookie
