@@ -27,7 +27,7 @@ const Navbar = () => {
   const { user, setUser } = useAuth();
   const menuRef = useRef(null);
   const location = useLocation();
-  const [cookies] = useCookies(["accessToken"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["accessToken"]);
 
   useEffect(() => {
     const token = cookies.accessToken;
@@ -57,6 +57,8 @@ const Navbar = () => {
   async function handleSignOut(event) {
     setUser(null);
     localStorage.removeItem("user");
+    removeCookie("accessToken");
+    removeCookie("refreshToken");
   }
 
   const closeMenu = () => {

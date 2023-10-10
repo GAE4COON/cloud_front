@@ -11,14 +11,14 @@ function SignIn() {
   const [password, setPassword] = useState("");
   const [Greeting, setGreeting] = useState("");
   const navigate = useNavigate();
-  const [cookies, setCookie] = useCookies(["jwt", "refreshToken"]);
+  const [cookies, setCookie] = useCookies(["accessToken", "refreshToken"]);
 
-  useEffect(() => {
-    axios
-      .get("/api/v1/users-api/hello")
-      .then((response) => setGreeting(response.data))
-      .catch((error) => console.log(error));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("/api/v1/test-api/login-test")
+  //     .then((response) => setGreeting(response.data))
+  //     .catch((error) => console.log(error));
+  // }, []);
 
   const handleSignIn = () => {
     const userData = {
@@ -51,7 +51,6 @@ function SignIn() {
   return (
     <>
       <h1></h1>
-      <h1>여기는 로그인 페이지 {Greeting}에서 가져왔습니다.</h1>
       <div className="sign-in-form">
         <h1>로그인</h1>
         <div className="input-group">

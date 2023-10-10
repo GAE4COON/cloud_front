@@ -10,6 +10,8 @@ function Signup() {
   const [idError, setIdError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [belongError, setbelongError] = useState("");
 
   const [idStatus, setIdStatus] = useState(null);
   const [passwordConfirmError, setPasswordConfirmError] = useState("");
@@ -31,12 +33,22 @@ function Signup() {
   };
 
   const isValidPassword = (password) => {
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // 최소 8 자, 최소 하나의 문자와 하나의 숫자
+    const passwordRegex = /^(?=.*[A-Za-z0-9])(?=.*\d)[A-Za-z0-9\d]{8,20}$/; // 최소 8 자, 최소 하나의 문자와 하나의 숫자
     return passwordRegex.test(password);
   };
 
+  const isValidName = (name) => {
+    const nameRegex = /^[a-zA-Z0-9가-힣]{2,15}$/; // 최소 8 자, 최소 하나의 문자와 하나의 숫자
+    return nameRegex.test(name);
+  };
+
+  const isValidBelong = (belong) => {
+    const belongRegex = /^[a-zA-Z0-9가-힣]{2,15}$/; // 최소 8 자, 최소 하나의 문자와 하나의 숫자
+    return belongRegex.test(belong);
+  };
+
   const isValidId = (id) => {
-    const idRegex = /^[a-zA-Z0-9]{4,12}$/; // 4~12자의 영문 대소문자와 숫자
+    const idRegex = /^[a-zA-Z0-9]{6,20}$/;
     return idRegex.test(id);
   };
 
@@ -62,11 +74,32 @@ function Signup() {
     }
   };
 
+  const handleNameChange = (e) => {
+    const nameValue = e.target.value;
+    setName(nameValue);
+    if (!isValidName(nameValue)) {
+      setNameError("이름은 최소 두글자 이상을 입력해주세요.");
+    } else {
+      setNameError("");
+    }
+  };
+
+  const handleBelongChange = (e) => {
+    const belongValue = e.target.value;
+    setBelong(belongValue);
+    if (!isValidBelong(belongValue)) {
+      setbelongError("소속은 최소 두글자 이상을 입력해주세요.");
+    } else {
+      setbelongError("");
+    }
+  };
+
   const handleIdChange = (e) => {
     const idValue = e.target.value;
     setId(idValue);
+    setIdStatus(null);
     if (!isValidId(idValue)) {
-      setIdError("아이디는 4~12자의 영문 대소문자와 숫자로 구성되어야 합니다.");
+      setIdError("아이디는 6~20자의 영문 대소문자와 숫자로 구성되어야 합니다.");
     } else {
       setIdError("");
     }
@@ -78,7 +111,7 @@ function Signup() {
     };
     try {
       const response = await axios.post(
-        "/api/v1/users/id-dup-check",
+        "/api/v1/users-api/id-dup-check",
         JSON.stringify(data),
         {
           headers: {
@@ -113,7 +146,7 @@ function Signup() {
 
     try {
       const response = await axios.post(
-        "/api/v1/users/mailConfirm",
+        "/api/v1/users-api/mailConfirm",
         JSON.stringify(data),
         {
           headers: {
@@ -138,7 +171,7 @@ function Signup() {
 
     try {
       const response = await axios.post(
-        "/api/v1/users/authCode",
+        "/api/v1/users-api/authCode",
         JSON.stringify(data),
         {
           headers: {
@@ -154,6 +187,7 @@ function Signup() {
       console.error("코드 확인 실패.", error);
     }
   };
+
   const handleSignUp = async () => {
     // 필요한 검증 로직 추가 (예: password와 checkpassword가 같은지 확인)
     if (password !== passwordConfirm) {
@@ -171,17 +205,17 @@ function Signup() {
       user_id: id,
       user_pw: password,
       user_check_pw: passwordConfirm,
+      user_name: name,
+      belong: belong,
       phone_number: phone,
       email: email,
-      name: name,
-      belong: belong,
-      emailCheck: emailConfirmed,
+      emailCheck: emailVerified,
     };
 
     try {
       // API 요청
       const response = await axios.post(
-        "/api/v1/users/sign-up",
+        "/api/v1/users-api/sign-up",
         JSON.stringify(data),
         {
           headers: {
@@ -190,7 +224,7 @@ function Signup() {
         }
       );
 
-      if (response.data.result) {
+      if (response.data.result === "success") {
         alert("성공적으로 회원가입되었습니다.");
         // 다른 로직이나 페이지 리다이렉트 등 필요한 처리 추가
       } else {
@@ -295,15 +329,30 @@ function Signup() {
       <div></div>
 
       {emailConfirmed ? (
-        <div className="input-group">
-          <label>인증 코드 *</label>
-          <input
-            type="text"
-            value={verificationCode}
-            onChange={(e) => setVerificationCode(e.target.value)}
-          />
-          <button onClick={checkCode}>확인</button>
-        </div>
+        <>
+          <div className="input-group">
+            <label>인증 코드 *</label>
+            <input
+              type="text"
+              value={verificationCode}
+              onChange={(e) => setVerificationCode(e.target.value)}
+            />
+            <button
+              onClick={checkCode}
+              disabled={emailVerified}
+              style={
+                emailVerified
+                  ? { backgroundColor: "#ccc", cursor: "not-allowed" }
+                  : {}
+              }
+            >
+              확인
+            </button>
+          </div>
+          {emailVerified && (
+            <span className="success-text">인증되었습니다.</span>
+          )}
+        </>
       ) : null}
 
       <div className="input-group">
@@ -318,42 +367,40 @@ function Signup() {
 
       <div className="input-group">
         <label>이름 *</label>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+        <input type="text" value={name} onChange={handleNameChange} />
         <div></div>
       </div>
+      {nameError && <span className="error-text">{nameError}</span>}
 
       <div className="input-group">
         <label>소속 *</label>
-        <input
-          type="text"
-          value={belong}
-          onChange={(e) => setBelong(e.target.value)}
-        />
+        <input type="text" value={belong} onChange={handleBelongChange} />
         <div></div>
       </div>
+      {belongError && <span className="error-text">{belongError}</span>}
 
       <button
         onClick={handleSignUp}
         className="submit"
         disabled={
           idStatus !== "available" ||
-          !emailConfirmed ||
+          !emailVerified ||
           id === "" ||
           password !== passwordConfirm ||
           password === "" ||
           email === "" ||
           phone === "" ||
+          belong === "" ||
+          name === "" ||
+          belongError !== "" ||
+          nameError !== "" ||
           passwordError !== "" ||
           emailError !== "" ||
           idError !== ""
         }
         style={
           idStatus !== "available" ||
-          !emailConfirmed ||
+          !emailVerified ||
           id === "" ||
           password !== passwordConfirm ||
           password === "" ||
@@ -361,6 +408,8 @@ function Signup() {
           phone === "" ||
           name === "" ||
           belong === "" ||
+          belongError !== "" ||
+          nameError !== "" ||
           passwordError !== "" ||
           emailError !== "" ||
           idError !== ""
