@@ -160,7 +160,7 @@ const Navbar = () => {
           {user ? (
             <>
               <NavBtn>
-                <h3>{user.name ? user.name : user.sub}님</h3>
+                <h5>{user.name ? user.name : user.sub}님</h5>
               </NavBtn>
               {/* <span>{user.name}</span> */}
               <NavBtn>

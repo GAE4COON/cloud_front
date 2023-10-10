@@ -12,6 +12,7 @@ function Signup() {
   const [emailError, setEmailError] = useState("");
   const [nameError, setNameError] = useState("");
   const [belongError, setbelongError] = useState("");
+  const [phoneError, setphoneError] = useState("");
 
   const [idStatus, setIdStatus] = useState(null);
   const [passwordConfirmError, setPasswordConfirmError] = useState("");
@@ -27,29 +28,44 @@ function Signup() {
   const [verificationCode, setVerificationCode] = useState("");
   const [emailConfirmed, setEmailConfirmed] = useState(false);
 
-  const isValidEmail = (email) => {
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    return emailRegex.test(email);
+  const isValidId = (id) => {
+    const idRegex = /^[A-Za-z0-9]{6,20}$/;
+    return idRegex.test(id);
   };
 
   const isValidPassword = (password) => {
-    const passwordRegex = /^(?=.*[A-Za-z0-9])(?=.*\d)[A-Za-z0-9\d]{8,20}$/; // 최소 8 자, 최소 하나의 문자와 하나의 숫자
+    const passwordRegex =
+      /^(?=.*[A-Za-z0-9])(?=.*\d)(?=.*[!@#$%^&*()\-_+=])[A-Za-z0-9!@#$%^&*()\-_+=]{8,20}$/;
     return passwordRegex.test(password);
+  };
+  const isValidEmail = (email) => {
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,10}$/;
+    return emailRegex.test(email);
   };
 
   const isValidName = (name) => {
-    const nameRegex = /^[a-zA-Z0-9가-힣]{2,15}$/; // 최소 8 자, 최소 하나의 문자와 하나의 숫자
+    const nameRegex = /^[a-zA-Z0-9가-힣]{2,15}$/;
     return nameRegex.test(name);
   };
 
   const isValidBelong = (belong) => {
-    const belongRegex = /^[a-zA-Z0-9가-힣]{2,15}$/; // 최소 8 자, 최소 하나의 문자와 하나의 숫자
+    const belongRegex = /^[a-zA-Z0-9가-힣]{2,15}$/;
     return belongRegex.test(belong);
   };
 
-  const isValidId = (id) => {
-    const idRegex = /^[a-zA-Z0-9]{6,20}$/;
-    return idRegex.test(id);
+  const isValidPhone = (phone) => {
+    const phoneRegex = /^[0-9]{3,15}$/;
+    return phoneRegex.test(phone);
+  };
+
+  const handlePhoneChange = (e) => {
+    const phoneValue = e.target.value;
+    setPhone(phoneValue);
+    if (!isValidPhone(phoneValue)) {
+      setphoneError("올바른 휴대폰번호 형식을 입력해주세요.");
+    } else {
+      setphoneError("");
+    }
   };
 
   const handleEmailChange = (e) => {
@@ -67,7 +83,7 @@ function Signup() {
     setPassword(passwordValue);
     if (!isValidPassword(passwordValue)) {
       setPasswordError(
-        "비밀번호는 최소 8자, 최소 하나의 문자와 하나의 숫자를 포함해야 합니다."
+        "비밀번호는 하나의 문자, 숫자, 특수문자를 8자 포함해야 합니다.\n허용문자:!@#$%^&*()-_+="
       );
     } else {
       setPasswordError("");
@@ -357,13 +373,10 @@ function Signup() {
 
       <div className="input-group">
         <label>휴대전화 *</label>
-        <input
-          type="tel"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-        />
+        <input type="tel" value={phone} onChange={handlePhoneChange} />
         <div></div>
       </div>
+      {phoneError && <span className="error-text">{phoneError}</span>}
 
       <div className="input-group">
         <label>이름 *</label>

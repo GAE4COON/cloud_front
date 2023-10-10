@@ -100,11 +100,18 @@ button:focus {
 }
 
 .error-text {
+    position: relative;
+    bottom:10px;
+    left: 10px;
     color: red;
     font-size: 12px;
+    white-space: pre-line;
   }
 
   .success-text {
+    position: relative;
+    bottom:10px;
+    left: 10px;
     color: green;
     font-size: 12px;
   }
