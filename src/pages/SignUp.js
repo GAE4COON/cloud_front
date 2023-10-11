@@ -145,7 +145,7 @@ function Signup() {
       user_id: id,
     };
     try {
-      const response = await idCheck("/api/v1/users-api/id-dup-check", data);
+      const response = await idCheck(data);
 
       if (response.data.result) {
         setIdStatus("taken");

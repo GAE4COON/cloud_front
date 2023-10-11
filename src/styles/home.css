@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+  height: 90vh;
 }
 
 .img-container {
@@ -11,12 +12,12 @@
 }
 
 .home-img {
-  max-width: 85%;
-  height: auto;
+  width: auto;
+  height: 75vh;
   object-fit: cover;
   display: block;
   margin: 0 auto;
-  margin-top: 35px;
+  position: relative;
   opacity: 0.5;
 }
 
@@ -43,9 +44,9 @@
   font-size: 1em; /* 1em은 home-select-box의 font-size와 동일합니다. */
 }
 
-.home-btn, .home-btn {
-  /* width: 15%; /* 상대적 너비 */
-  /* height: 20%; */ 
+.home-btn {
+  width: 18vh; /* 상대적 너비 */
+  height: 6vh; /* 상대적 높이 */
   font-size: 10px;
   background-color:white;
   color: #3064D6;

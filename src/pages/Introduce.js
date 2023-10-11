@@ -1,109 +1,232 @@
-import React, {Component} from "react";
+import React, { useEffect, useRef } from "react";
 import "../styles/Introduce.css";
+import { Tabs } from "antd";
+import styled from "styled-components";
 
-class Home extends React.Component {
+const useIntersectionObserver = (ref) => {
+  const [intersectionRatio, setIntersectionRatio] = React.useState(0);
 
-  
-  state = {
-    displayedText1:"",
-  }
-
-  componentDidMount() {
-    this.animateText(
-      "보안성을 고려한 클라우드 아키텍처 자동 도식화",
-      "displayedText1",
-      100
+  useEffect(() => {
+    const target = ref.current;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        setIntersectionRatio(entries[0].intersectionRatio);
+      },
+      { threshold: [0, 0.12, 0.25, 0.37, 0.5, 0.62, 0.75, 0.87, 1] }
     );
-   
-  }
-  animateText = (fullText, stateKey, speed) => {
-    let index = 0;
-    const interval = setInterval(() => {
-      index++;
-      this.setState({
-        [stateKey]: fullText.substring(0, index)
-      });
-      if (index === fullText.length) {
-        clearInterval(interval);
+
+    if (target) {
+      observer.observe(target);
+    }
+
+    return () => {
+      if (target) {
+        observer.unobserve(target);
       }
-    }, speed);
-  };
+    };
+  }, [ref]);
 
+  return intersectionRatio;
+};
 
-  render() {
-    
-    return (
-      <div>
-        <div className="container1">
-          <div className="content">
-                <p>{this.state.displayedText1}</p>
-          </div>
-        </div>
+const ContentBlock = ({
+  bgColor,
+  summaryText,
+  securityText,
+  textColor = "white",
+}) => (
+  <div
+    style={{
+      backgroundColor: bgColor,
+      margin: "15px",
+      fontSize: "40px",
+      borderRadius: "10px",
+    }}
+    className="content-block"
+  >
+    <p style={{ color: textColor, fontSize: "24px" }}>{summaryText}</p>
+    <p style={{ color: textColor, fontSize: "20px" }}>{securityText}</p>
+  </div>
+);
+const LogoSection = () => {
+  const logoSectionRef = useRef(null);
+  const intersectionRatio = useIntersectionObserver(logoSectionRef);
 
-        <div className="container2">
-          <p>GAE4COON은  <span class='highlight'>보안 전문가들</span>로 구성되며, <br/>
-          클라우드 마이그레이션 이전 단계에서 <span class='highlight'>ISO 27001</span>을 기반으로 한 <span class='highlight'>보안과 도식화</span>를 제공합니다.</p>
-        </div>
-
-        <div className="container3">
-          <div>
-            <p className="title">ISO 27001이란?</p>
-            <p>
-              ISO 27001 is an international standard
-              for Information Security Management Systems (ISMS). 
-              It provides a framework for establishing, implementing, maintaining,
-              and continually improving an ISMS within the context of an organization's overall business risks.
-              The standard outlines a risk management process and specifies a set of controls that organizations 
-              can implement to secure their information assets.
-            </p>
-          </div>
-          <div>
-            <p className="title">클라우드 보안의 'Rehost'란?</p>
-            <p>
-              ISO 27001 is an international standard
-              for Information Security Management Systems (ISMS). 
-              It provides a framework for establishing, implementing, maintaining,
-              and continually improving an ISMS within the context of an organization's overall business risks.
-              The standard outlines a risk management process and specifies a set of controls that organizations 
-              can implement to secure their information assets.
-            </p>
-          </div>
-        </div>
-
-        <div className="img">
-          <img src="/assets/img/input.png"  alt="input_img" className="box-shadow" width="60%" height="60%"/>
-          <p className="text">On Premise</p>
-
-          <img src="/assets/img/output.png"  alt="output_img" className="box-shadow" width="60%" height="60%" />
-          <p className="text"> After Migration </p> 
-
-        </div>
-        <div className="Excels">
-        <div id='Excels-left' />
-          <div className="container5">
-          
-            <div className="content1">
-              <p className="summary">보안성을 고려한 클라우드 아키텍처 자동 도식화 </p>
-              <p className="security">보안 기능  </p>
-            </div>
-            <div className="content2">
-              <p className="summary">보안성을 고려한 클라우드 아키텍처 자동 도식화 </p>
-              <p className="security">성능 최적화</p>
-            </div>
-            
-            <div className="content1">
-              <p className="summary">보안성을 고려한 클라우드 아키텍처 자동 도식화 </p>
-              <p className="security">비용 최적화</p>
-            </div>
-            
-          </div>
-          <div id='Excels-right' />
+  return (
+    <div
+      className="logo-container"
+      ref={logoSectionRef}
+      style={{ opacity: intersectionRatio }}
+    >
+      <div className="content">
+        <img src="assets/img/introducelogo.png" alt="logo" />
+        <p>
+          'CLOUD MAESTRO'는 보안 전문가들로 구성된 팀, 'GAE4COON'입니다.
+          <br />
+          클라우드 마이그레이션 이전 단계에서{" "}
+          <span className="highlight">ISO 27001</span>을 기반으로 <br />
+          <span className="highlight">보안성을 고려한 아키텍처 도식화</span>를
+          제공합니다.
+        </p>
       </div>
-     
     </div>
+  );
+};
 
-  
-  )}
-}
+const TabSection = () => {
+  const TabSectionRef = useRef(null);
+  const intersectionRatio = useIntersectionObserver(TabSectionRef);
+
+  return (
+    <div
+      className="container2"
+      ref={TabSectionRef}
+      style={{ opacity: intersectionRatio }}
+    >
+      <StyledTabs>
+        <Tabs.TabPane tab="Cloud Migration이란?" key="1">
+          온프레미스의 정보자산을 Cloud 환경으로 이전하는 과정
+        </Tabs.TabPane>
+        <Tabs.TabPane tab="클라우드 보안의 Rehost란?" key="2">
+          ISO 27001 is an international standard for Information Security
+          Management Systems (ISMS). It provides a framework for establishing,
+          implementing, maintaining, and continually improving an ISMS within
+          the context of an organization's overall business risks. The standard
+          outlines a risk management process and specifies a set of controls
+          that organizations can implement to secure their information assets.
+        </Tabs.TabPane>
+        <Tabs.TabPane tab="ISO 27001이란?" key="3">
+          ISO 27001 is an international standard for Information Security
+          Management Systems (ISMS). It provides a framework for establishing,
+          implementing, maintaining, and continually improving an ISMS within
+          the context of an organization's overall business risks. The standard
+          outlines a risk management process and specifies a set of controls
+          that organizations can implement to secure their information assets.
+        </Tabs.TabPane>
+      </StyledTabs>
+    </div>
+  );
+};
+
+const ImageSection = () => {
+  const IMGSectionRef1 = useRef(null);
+  const IMGSectionRef2 = useRef(null);
+
+  const intersectionRatio1 = useIntersectionObserver(IMGSectionRef1);
+  const intersectionRatio2 = useIntersectionObserver(IMGSectionRef2);
+
+  return (
+    <>
+      <div
+        className="img"
+        ref={IMGSectionRef1}
+        style={{ opacity: intersectionRatio1 }}
+      >
+        <ImageWithCaption
+          src="/assets/img/input.png"
+          alt="input_img"
+          caption="On Premise"
+        />
+      </div>
+
+      <div
+        className="img"
+        ref={IMGSectionRef2}
+        style={{ opacity: intersectionRatio2 }}
+      >
+        <ImageWithCaption
+          src="/assets/img/output.png"
+          alt="output_img"
+          caption="After Migration"
+        />
+      </div>
+    </>
+  );
+};
+
+const ImageWithCaption = ({ src, alt, caption }) => {
+  const imageRef = useRef(null);
+
+  useIntersectionObserver(imageRef, () => {
+    console.log("Image is in view!");
+  });
+
+  return (
+    <>
+      <img src={src} alt={alt} className="box-shadow" />
+      <p className="text">{caption}</p>
+    </>
+  );
+};
+
+const ContentSection = () => {
+  const ContentSectionRef = useRef(null);
+
+  const intersectionRatio = useIntersectionObserver(ContentSectionRef);
+
+  return (
+    <>
+      <div
+        className="content-dummy"
+        ref={ContentSectionRef}
+        style={{ opacity: intersectionRatio }}
+      >
+        <div className="Excels">
+          <div id="Excels-left" />
+          <div className="container5">
+            <ContentBlock
+              bgColor="rgba(59, 108, 125, 0.8)"
+              summaryText="보안성을 고려한 클라우드..."
+              securityText="보안 기능"
+            />
+            <ContentBlock
+              bgColor="rgba(59, 108, 125, 0.2)"
+              summaryText="보안성을 고려한 클라우드..."
+              securityText="성능 최적화"
+              textColor="black"
+            />
+            <ContentBlock
+              bgColor="rgba(59, 108, 125, 0.8)"
+              summaryText="보안성을 고려한 클라우드..."
+              securityText="비용 최적화"
+            />
+          </div>
+          <div id="Excels-right" />
+        </div>
+      </div>
+    </>
+  );
+};
+
+const Home = () => (
+  <div>
+    <LogoSection />
+    <TabSection />
+    <ImageSection />
+    <ContentSection />
+  </div>
+);
 
 export default Home;
+
+const StyledTabs = styled(Tabs)`
+  .ant-tabs-nav {
+    justify-content: center;
+  }
+
+  .ant-tabs-tab {
+    font-size: 20px;
+    width: 33vh;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-weight: bold;
+  }
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  font-size: 17px;
+`;

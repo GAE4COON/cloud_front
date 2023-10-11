@@ -15,7 +15,6 @@ import InputAWS from "./pages/InputAWS";
 
 import Back from "./pages/Backend/BackEnd";
 
-
 function App() {
   return (
     <div className="App">
@@ -28,8 +27,7 @@ function App() {
 
               <Route exact path="/home" element={<Home />} />
 
-              <Route path="/ec2" element={<Back/>}/>
-
+              <Route path="/ec2" element={<Back />} />
 
               <Route path="/about" element={<Introduce />} />
               <Route path="/about/example" element={<Example />} />

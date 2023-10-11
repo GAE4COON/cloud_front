@@ -1,189 +1,88 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
-
-a {
-
-    text-decoration: none;
-    /* 밑줄 제거 */
-    color: inherit;
-    /* 부모의 글자색을 상속 */
-}
-
-.container1 {
-    background-color: #326070;
+/* Common styles and font face */
+@font-face {
+    font-family: "Pretendard-ExtraBold";
+    font-weight: normal;
+    src: url("./../assets/font/Pretendard-ExtraBold.otf") format("truetype");
+  }
+  
+  .highlight {
+    background-color: #F4EEFA;
+  }
+  
+  .box-shadow {
+    box-shadow: 5px 5px 5px #000;
+  }
+  
+  .logo-container {
+    background-color: #fff;
     min-height: 200px;
     width: 100%;
     display: flex;
-
-    margin-top: 3px;
+    justify-content: center;
+  }
+  
+  .logo-container .content > img {
+    width: 80%;
+    margin-top: 75px;
+    margin-bottom: 75px;
+  }
+  
+  .logo-container .content > p {
+    font-family: "Pretendard-ExtraBold";
+    text-align: center;
+    font-size: 30px;
+    color: #333;
 }
 
-.content>p {
-    text-align: left;
-    /* Horizontal centering */
-    color: white;
-    font-size: 20px;
-    margin: 10px;
-    border-bottom: 2px solid white;
-    /* 밑줄 추가 */
-    font-family: "Roboto";
-}
-
-/* container2 */
-.container2 {
+  
+  .container2 {
     min-height: 300px;
     width: 100%;
     display: flex;
-    margin-top: 3px;
+    margin-top: 300px;
+    margin-bottom: 300px;
     background-color: #ffffff;
     justify-content: center;
-    /* Horizontal centering */
     flex-direction: column;
     align-items: center;
 
-}
-
-p {
-    text-align: center;
-    justify-content: center;
-    /* Horizontal centering */
-    font-family: 'Arial', sans-serif;
-    /* 폰트 변경 */
-    font-size: 20px;
-    /* 폰트 크기 변경 */
-    color: #333;
-    /* 글자색 변경 */
-    line-height: 1.6;
-    /* 줄 간격 조절 */
-    font-family: "Roboto";
-}
-
-.container2>p {
-    text-align: center;
-    justify-content: center;
-    /* Horizontal centering */
-    font-family: 'Arial', sans-serif;
-    /* 폰트 변경 */
-    font-size: 20px;
-    /* 폰트 크기 변경 */
-    color: #333;
-    /* 글자색 변경 */
-    line-height: 1.6;
-    /* 줄 간격 조절 */
-    font-family: "Roboto";
-    font-weight: bold;
-
-}
-
-.highlight {
-    background-color: #F4EEFA;
-}
-
-/* container 3 */
-.container3 {
-    display: flex;
-    justify-content: center;
-
-}
-
-.container3>div {
-    width: 30%;
-    /* Adjust this as needed */
-    text-align: center;
-    margin: 10px;
-}
-
-
-.title {
-
-    font-size: 18px;
-    /* 글자 크기 설정 */
-    font-weight: bold;
-    /* 글자를 굵게 설정 */
-    font-family: 'Roboto';
-    /* 글씨체를 Roboto로 설정 */
-    margin-bottom: 1em;
-    /* 다음 요소까지의 마진을 설정 */
-    background-color: rgba(59, 108, 125, 0.2);
-    /* 배경색을 노란색으로 설정 */
-    border-bottom: 4px solid white;
-    /* 밑줄 추가 */
-    padding: 0.5em;
-    /* 패딩 설정 */
-    box-shadow: 2px 1px #000;
-
-}
-
-
-
-.box-shadow {
-    box-shadow: 5px 5px 5px #000;
-}
-
-.container4 {
-    box-shadow: 5px 5px 5px #000;
-    width: 40%;
-}
-
-/* Main Page */
-.Excels {
+  }
+  
+  .img img {
+    width: 60%;
+    height: 60%;
+    margin-top: 150px;
+    margin-bottom: 50px;
+  }
+  
+  .text {
+    /* Styles for text under images, if needed */
+  }
+  
+  /* Content styles */
+  .Excels {
     display: grid;
     grid-template-columns: 15% 70% 15%;
-
-}
-
-.content1, .content2 {
+  }
+  
+  .content-block {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-
-    background-color: rgba(59, 108, 125, 0.8);
     margin: 15px;
     font-size: 40px;
     border-radius: 10px;
-}
-
-.content2 {
-    background-color: rgba(59, 108, 125, 0.2);
-}
-
-.content1>.summary {
-    /* summary 클래스에 대한 추가적인 스타일링이 필요하다면 추가 */
+ 
+  }
+  
+  .content-block > p {
     margin: 0;
-    /* 상단 정렬을 위한 마진 제거 */
     padding: 10px;
-    /* 패딩을 원하는 대로 조절 */
-    justify-content: flex-start;
-    /* 상단에 위치 */
-
-    color: white;
-    font-size: 24px;
-}
-
-.content2>.summary, .content2>p {
-    /* summary 클래스에 대한 추가적인 스타일링이 필요하다면 추가 */
-    margin: 0;
-    /* 상단 정렬을 위한 마진 제거 */
-    padding: 10px;
-    /* 패딩을 원하는 대로 조절 */
-    align-self: flex-start;
-    /* 부모 flex 컨테이너의 시작점에 정렬 */
-    color: black;
-    font-size: 24px;
-
-}
-
-.content1>.security, .content2>.security {
-    color: white;
-    font-size: 20px;
-    margin: 0;
-    /* 하단 정렬을 위한 마진 제거 */
-    padding: 10px;
-    /* 패딩을 원하는 대로 조절 */
-    align-self: flex-end;
     font-family: "Roboto";
-}
-
-.content2>.security {
-    color: black;
+  }
+  
+.content-dummy{
+    margin-top: 300px;
+    margin-bottom: 300px;
 }
