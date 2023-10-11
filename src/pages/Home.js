@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/home.css";
-import axios from "axios";
 import { useCookies } from "react-cookie";
+import { loginTest } from "../apis/auth.js";
 
 function Home() {
   const navigate = useNavigate();
@@ -13,18 +13,18 @@ function Home() {
     // useCookies 훅에서 제공하는 cookies 객체를 사용하여 accessToken 값을 가져옵니다.
     const token = cookies.accessToken;
 
-    if (token) {
-      axios
-        .get("/api/v1/test-api/login-test", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => setGreeting(response.data))
-        .catch((error) => console.log(error));
-    } else {
-      console.log("No token found in cookies.");
-    }
+    const fetchData = async () => {
+      if (token) {
+        try {
+          const response = await loginTest(token);
+          setGreeting(response.data);
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        console.log("No token found in cookies.");
+      }
+    };
   }, [cookies]);
 
   const handleAutoDraw = () => {

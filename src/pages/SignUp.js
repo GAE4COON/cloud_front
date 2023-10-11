@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import { useAuth } from "../utils/auth/authContext";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { idCheck, emailCheck, codeCheck, join } from "../apis/auth.js";
 import "../styles/signup.css";
 
 function Signup() {
@@ -27,6 +27,9 @@ function Signup() {
   const [emailVerified, setEmailVerified] = useState(false);
   const [verificationCode, setVerificationCode] = useState("");
   const [emailConfirmed, setEmailConfirmed] = useState(false);
+
+  const { user, setUser } = useAuth();
+  const navigate = useNavigate();
 
   const isValidId = (id) => {
     const idRegex = /^[A-Za-z0-9]{6,20}$/;
@@ -58,6 +61,7 @@ function Signup() {
     return phoneRegex.test(phone);
   };
 
+  //휴대폰 유효성 검사
   const handlePhoneChange = (e) => {
     const phoneValue = e.target.value;
     setPhone(phoneValue);
@@ -68,6 +72,7 @@ function Signup() {
     }
   };
 
+  //이메일 유효성 검사
   const handleEmailChange = (e) => {
     const emailValue = e.target.value;
     setEmail(emailValue);
@@ -78,6 +83,7 @@ function Signup() {
     }
   };
 
+  //비밀번호 유효성 검사
   const handlePasswordChange = (e) => {
     const passwordValue = e.target.value;
     setPassword(passwordValue);
@@ -90,6 +96,7 @@ function Signup() {
     }
   };
 
+  //이름 유효성 검사
   const handleNameChange = (e) => {
     const nameValue = e.target.value;
     setName(nameValue);
@@ -100,6 +107,7 @@ function Signup() {
     }
   };
 
+  //소속 유효성 검사
   const handleBelongChange = (e) => {
     const belongValue = e.target.value;
     setBelong(belongValue);
@@ -110,6 +118,7 @@ function Signup() {
     }
   };
 
+  //아이디 유효성 검사
   const handleIdChange = (e) => {
     const idValue = e.target.value;
     setId(idValue);
@@ -121,20 +130,22 @@ function Signup() {
     }
   };
 
+  //패스워드 동일한지 확인
+  useEffect(() => {
+    if (password !== passwordConfirm && passwordConfirm !== "") {
+      setPasswordConfirmError("비밀번호가 일치하지 않습니다.");
+    } else {
+      setPasswordConfirmError("");
+    }
+  }, [password, passwordConfirm]);
+
+  //아이디 중복 확인
   const checkIdDuplication = async () => {
     const data = {
       user_id: id,
     };
     try {
-      const response = await axios.post(
-        "/api/v1/users-api/id-dup-check",
-        JSON.stringify(data),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await idCheck("/api/v1/users-api/id-dup-check", data);
 
       if (response.data.result) {
         setIdStatus("taken");
@@ -147,29 +158,15 @@ function Signup() {
     }
   };
 
-  useEffect(() => {
-    if (password !== passwordConfirm && passwordConfirm !== "") {
-      setPasswordConfirmError("비밀번호가 일치하지 않습니다.");
-    } else {
-      setPasswordConfirmError("");
-    }
-  }, [password, passwordConfirm]);
-
+  //인증코드 전송
   const checkEmail = async () => {
     const data = {
       email: email,
     };
 
     try {
-      const response = await axios.post(
-        "/api/v1/users-api/mailConfirm",
-        JSON.stringify(data),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await emailCheck(data);
+
       setEmailConfirmed(true);
       if (response.data.result) {
         alert("인증 코드를 보냈습니다.");
@@ -179,6 +176,7 @@ function Signup() {
     }
   };
 
+  //메일 코드인증
   const checkCode = async () => {
     const data = {
       email: email,
@@ -186,15 +184,7 @@ function Signup() {
     };
 
     try {
-      const response = await axios.post(
-        "/api/v1/users-api/authCode",
-        JSON.stringify(data),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await codeCheck(data);
       setEmailVerified(true);
       if (response.data.result) {
         alert("인증이 완료되었습니다.");
@@ -204,8 +194,8 @@ function Signup() {
     }
   };
 
+  //회원가입
   const handleSignUp = async () => {
-    // 필요한 검증 로직 추가 (예: password와 checkpassword가 같은지 확인)
     if (password !== passwordConfirm) {
       alert("비밀번호가 일치하지 않습니다.");
       return;
@@ -216,7 +206,6 @@ function Signup() {
       return;
     }
 
-    // 서버에 보낼 데이터 객체 생성
     const data = {
       user_id: id,
       user_pw: password,
@@ -230,19 +219,11 @@ function Signup() {
 
     try {
       // API 요청
-      const response = await axios.post(
-        "/api/v1/users-api/sign-up",
-        JSON.stringify(data),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await join(data);
 
       if (response.data.result === "success") {
         alert("성공적으로 회원가입되었습니다.");
-        // 다른 로직이나 페이지 리다이렉트 등 필요한 처리 추가
+        navigate("/login");
       } else {
         alert(response.data.message || "회원가입 중 오류가 발생했습니다.");
       }
@@ -252,9 +233,6 @@ function Signup() {
     }
   };
 
-  const { user, setUser } = useAuth();
-  const navigate = useNavigate();
-
   async function handleCallbackResponse(response) {
     console.log(response.credential);
     try {
@@ -263,7 +241,7 @@ function Signup() {
       console.log(userObject);
 
       setTimeout(() => {
-        navigate("/");
+        navigate("/sign-in");
       }, 1500);
     } catch (e) {
       if (e.response) {
