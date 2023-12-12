@@ -22,7 +22,7 @@ export function ec2Price(priceElement) {
         instance: instance,
         lifeCycle: billingOption,
       },
-      baseURL: "http://localhost:8080",
+      baseURL: "https://oncloud-back.k-paas.org",
     })
       .then(function (response) {
         // 가정: response에 원하는 데이터가 있음
@@ -59,7 +59,7 @@ export function fetchPlatformData(
         platform: platform,
         instanceType: instanceType,
       },
-      baseURL: "http://localhost:8080",
+      baseURL: "https://oncloud-back.k-paas.org",
     })
       .then(function (response) {
         setData(response.data);

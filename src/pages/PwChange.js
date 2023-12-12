@@ -92,7 +92,7 @@ function PwChange() {
   const handleSignOut = () => {
     setUser(null);
     localStorage.clear();
-    window.location.href = "/home";
+    window.location.href = "/";
   };
 
   const handleCurPwCheck = async () => {

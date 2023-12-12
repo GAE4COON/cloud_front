@@ -61,7 +61,7 @@ export default function Second() {
         <CloudContainer>
             <IntroduceContainer>
                 <TextContent>클라우드 환경은 동적성과 비가시성이라는 특성을 가집니다. 가상에서 자원을 동작시키며 빠르게 변화하기에, 활성화된 리소스를 식별하고 정리하는 것에 대한 어려움이 존재할 수 밖에 없습니. 자산 관리의 어려움은 곧 사고 식별과 대응의 어려움으로도 이어지며, 불필요한 비용 발생 및 연쇄적인 보안 사고의 발생이 가능해지는 것입니다.</TextContent>
-                <TextTitleContent>Cloud Maestro를 통해 클라우드 환경에 빠르게 적응해보세요!</TextTitleContent>
+                <TextTitleContent>On Cloud를 통해 클라우드 환경에 빠르게 적응해보세요!</TextTitleContent>
             </IntroduceContainer>
         </CloudContainer>
         
@@ -69,7 +69,7 @@ export default function Second() {
         <FlexContainer>
             <TextContainer>
                 <TextContent>
-                Cloud Maestro는 사전으로 보안성이 점검된 아키텍처를 제시합니다. 이를 통해 기업은 보안 사고 발생에 대한 우려를 줄일 수 있습니다                </TextContent>
+                On Cloud는 사전으로 보안성이 점검된 아키텍처를 제시합니다. 이를 통해 기업은 보안 사고 발생에 대한 우려를 줄일 수 있습니다                </TextContent>
             </TextContainer>
         
             <ImageContainer>
@@ -83,7 +83,7 @@ export default function Second() {
             </ImageContainer>
             <TextContainer>
                 <TextContent>
-                Cloud Maestro는 다양한 가이드 기능을 제공합니다. 보안 권고 및 가이드를 통한 보안 전략 수립, 리소스 가이드를 통한 클라우드 관리 역량 향상으로 클라우드 환경에 대비할 수 있습니다.
+                On Cloud는 다양한 가이드 기능을 제공합니다. 보안 권고 및 가이드를 통한 보안 전략 수립, 리소스 가이드를 통한 클라우드 관리 역량 향상으로 클라우드 환경에 대비할 수 있습니다.
               </TextContent>
             </TextContainer>
         </FlexContainer>

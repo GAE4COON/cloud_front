@@ -242,7 +242,7 @@ const Home = () => {
   return (
     <div className="about-container">
       <div className="section" ref={addtoRefs}>
-        <LogoSection />
+        {/* {<LogoSection />} */}
         <Introduce />
       </div>
       <div className="section" ref={addtoRefs}>

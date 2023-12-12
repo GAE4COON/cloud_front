@@ -48,8 +48,8 @@ function Home() {
           <HomeContent>
             {/* <img src="assets/img/hometext.png" alt="logo" className="home-text" /> */}
             <HomeTextContent>
-            <HomeText>Cloud Maestro와 함께<br/> 클라우드 환경에 빠르게 적응해보세요.</HomeText>
-            <HomeTextDescription>Cloud Maestro는 클라우드 환경에 대한 지식이 없는 사람들도 쉽게 클라우드 환경을 이해하고, 활용할 수 있도록 도와주는 클라우드 환경 시뮬레이션 서비스입니다.</HomeTextDescription>
+            <HomeText>On Cloud와 함께<br/> 클라우드 환경에 빠르게 적응해보세요.</HomeText>
+            <HomeTextDescription>On Cloud는 클라우드 환경에 대한 지식이 없는 사람들도 쉽게 클라우드 환경을 이해하고, 활용할 수 있도록 도와주는 클라우드 환경 시뮬레이션 서비스입니다.</HomeTextDescription>
             </HomeTextContent>
             <HomeImg src="assets/img/homelogo.png" alt="logo" />
           </HomeContent>
