@@ -9,13 +9,13 @@ const Footer = () => {
         <Row>
           <Col lg={8} sm={24} xs={24}>
             <div className="footer-center">
-              <h2>Gae4coon</h2>
+              <h2>On-Cloud</h2>
               <h4>Office: 서울 금천구 가산디지털1로 145</h4>
               <h4>
                 에이스하이엔드타워 3차 제1004호, 1004-2 (08506)
               </h4>
               <h4>Belong: Kitri, BoB 12th</h4>
-              <h4>Email: gae4coon@gmail.com</h4>
+          
             </div>
           </Col>
           <Col lg={8} sm={24} xs={24}>
@@ -44,7 +44,7 @@ const Footer = () => {
       </div>
       <Row className="bottom-bar">
         <Col lg={24} sm={24}>
-          <p>© 2023 Gae4coon</p>
+          <p>© 2023 OnCloud</p>
         </Col>
       </Row>
     </footer>

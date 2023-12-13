@@ -21,6 +21,7 @@ import MyResource from "./pages/MyResource";
 import MySummary from "./pages/MySummary";
 import MyPage from "./pages/MyPage";
 import PwChange from "./pages/PwChange";
+import Guideline from "./pages/Guideline";
 
 import { DataProvider } from "./components/DataContext";
 import MySecurity from "./pages/MySecurity";
@@ -64,6 +65,7 @@ const RoutesWithFooter = () => {
               <Route path="/sign-up" element={<Signup />} />
               <Route path="/sign-in" element={<Signin />} />
               <Route path="/data" element={<DataComponent />} />
+              <Route path="/guideline" element={<Guideline />} />
 
               <Route element={<PrivateRoute />}>
                 <Route path="/draw" element={<Draw />} />

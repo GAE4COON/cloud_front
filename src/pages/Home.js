@@ -48,8 +48,9 @@ function Home() {
           <HomeContent>
             {/* <img src="assets/img/hometext.png" alt="logo" className="home-text" /> */}
             <HomeTextContent>
-            <HomeText>On Cloud와 함께<br/> 클라우드 환경에 빠르게 적응해보세요.</HomeText>
-            <HomeTextDescription>On Cloud는 클라우드 환경에 대한 지식이 없는 사람들도 쉽게 클라우드 환경을 이해하고, 활용할 수 있도록 도와주는 클라우드 환경 시뮬레이션 서비스입니다.</HomeTextDescription>
+   <HomeText>NewFra와 함께<br/> 클라우드 환경에 빠르게 적응해보세요.</HomeText>
+            <HomeTextDescription>NewFra는 클라우드에 대한 전문지식이 없는 사람들도 쉽게 클라우드 환경을 이해하고 활용할 수 있도록 돕는 클라우드 마이그레이션 및 도입 지원 플랫폼입니다.</HomeTextDescription>
+
             </HomeTextContent>
             <HomeImg src="assets/img/homelogo.png" alt="logo" />
           </HomeContent>

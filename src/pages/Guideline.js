@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import "../styles/App.css";
 import styled from "styled-components";
 import Sidebar from "../components/MyPageSideBar";
-import ManageHuman from "../components/security/ManageHuman";
+//import ManageHuman from "../components/security/ManageHuman";
+import Migration from "../components/security/Migration";
 // import { PDFDownloadLink } from "@react-pdf/renderer"; // react-to-pdf의 PDFDownloadLink 가져오기
 
 //import { PDFViewer } from '@react-pdf/renderer';
 
-function MySecurity() {
+function Guideline() {
   const handleDownload = (filelink, filename) => {
     const link = document.createElement("a");
     link.href = filelink;
@@ -33,14 +34,16 @@ function MySecurity() {
             <Sidebar />
           </div>
           <div className="main-container">
-            <Title> 보안 가이드 라인 </Title>
-            {isManage && (
+            <Title> Migration </Title>
+        
+
+      {isManage && (
               <>
                 <Button
                   onClick={() =>
                     handleDownload(
                       "/assets/pdf/ManageHuman2.pdf",
-                      "인적/물류 보안가이드라인.pdf"
+                      "Migration.pdf"
                     )
                   }
                 >
@@ -55,10 +58,11 @@ function MySecurity() {
               </>
             )}
 
+
             <ResourceContainer>
               {isManage && (
                 <>
-                  <ManageHuman />
+                  <Migration />
                 </>
               )}
             </ResourceContainer>
@@ -69,7 +73,7 @@ function MySecurity() {
   );
 }
 
-export default MySecurity;
+export default Guideline;
 
 const Button = styled.div`
   color: black; /* 버튼 텍스트 색상 */

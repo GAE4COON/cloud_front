@@ -352,7 +352,7 @@ function Draw() {
             case "Error":
               backgroundTitle = (
                 <>
-                  <CloseCircleOutlined style={{ color: "red" }} /> Error!
+                  <CloseCircleOutlined style={{ color: "red" }} /> CVE
                 </>
               ); // 에러 배경색
               break;
