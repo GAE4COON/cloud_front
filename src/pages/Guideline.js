@@ -7,7 +7,7 @@ import ManageHuman from "../components/security/ManageHuman";
 
 //import { PDFViewer } from '@react-pdf/renderer';
 
-function MySecurity() {
+function Guide() {
   const handleDownload = (filelink, filename) => {
     const link = document.createElement("a");
     link.href = filelink;
@@ -33,7 +33,7 @@ function MySecurity() {
             <Sidebar />
           </div>
           <div className="main-container">
-            <Title> 보안 가이드 라인 </Title>
+            <Title> 마이그레이션 가이드라인 </Title>
             {isManage && (
               <>
                 <Button
@@ -69,7 +69,7 @@ function MySecurity() {
   );
 }
 
-export default MySecurity;
+export default Guide;
 
 const Button = styled.div`
   color: black; /* 버튼 텍스트 색상 */

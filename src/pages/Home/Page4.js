@@ -26,14 +26,14 @@ export default function Page4() {
         The Beginning of Cloud Computing Migration Product Introduction 
         </p>
         <div>
-          <Button type="dashed"
+         {/* { <Button type="dashed"
                   onClick={() =>
                     handleDownload(
                       "/assets/pdf/CloudMaestro_Introduce.pdf",
                       "CloudMaestro 소개서.pdf"
                     )
                   }
-                >Product Introduction Download</Button>
+                >Product Introduction Download</Button>} */}
         </div>
       </ButtonContainer>
     </FlexContainer>

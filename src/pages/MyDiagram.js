@@ -133,6 +133,16 @@ const MyArchitecture = () => {
                       </button>
                     ),
                   },
+                  {
+                    key: "3",
+                    label: (
+                      <button
+                      onClick={() => { navigate('/guide'); }}
+                      >
+                        Migration
+                      </button>
+                    ),
+                  },
                 ];
                 return (
                   <CloudInstance key={instance.key}>

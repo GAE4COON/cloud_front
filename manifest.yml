@@ -1,0 +1,8 @@
+applications:
+  - name: oncloud
+    host: oncloud
+    memory: 1024M
+    instances: 3
+    buildpacks:
+      - staticfile_buildpack
+    path: build/ # Specify the path to your build directory

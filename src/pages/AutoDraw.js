@@ -14,7 +14,7 @@ const AutoDraw = () => {
     "templateExcel.xlsx"
   );
   const downloadJson = useFileDownload(
-    "/assets/template/templateJson.json",
+    "/assets/template/templateJson2.json",
     "templateJson.json"
   );
 

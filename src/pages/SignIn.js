@@ -39,7 +39,7 @@ function SignIn() {
         console.log("Local check :", localStorage.getItem("accessToken"));
         message.warning("로그인 성공");
 
-        window.location.href = "/home";
+        window.location.href = "/";
       } else {
         message.warning(
           "로그인에 실패했습니다. 아이디 및 비밀번호를 확인해주세요."
@@ -120,11 +120,6 @@ function SignIn() {
           제출
         </button>
 
-        <div
-          id="signInDiv"
-          className="googleDiv"
-          style={{ visibility: user ? "hidden" : "visible" }}
-        ></div>
       </div>
     </div>
   );

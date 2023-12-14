@@ -28,7 +28,7 @@ import PrivateRoute from "./components/privateRoute";
 import NotFound from "./pages/NotFound";
 // import { PublicRoute } from "./components/publicRoute";
 import DataComponent from "./pages/DataComponent";
-import ScrollToTop from "./components/ScrollToTop";
+import Guide from './pages/Guideline';
 
 function App() {
   useTokenExpirationChecker();
@@ -37,7 +37,7 @@ function App() {
       <AuthProvider>
         <DataProvider>
           <BrowserRouter>
-            <ScrollToTop />
+            {/* {<ScrollToTop />} */}
             <Navbar />
             <RoutesWithFooter />
 
@@ -62,6 +62,7 @@ const RoutesWithFooter = () => {
               <Route path="/sign-up" element={<Signup />} />
               <Route path="/sign-in" element={<Signin />} />
               <Route path="/data" element={<DataComponent />} />
+              <Route path="/guide" element={<Guide />} />
 
               <Route element={<PrivateRoute />}>
                 <Route path="/draw" element={<Draw />} />
